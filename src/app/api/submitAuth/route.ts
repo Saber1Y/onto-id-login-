@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       message: "Authentication successful",
     };
     return NextResponse.json(token);
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 }

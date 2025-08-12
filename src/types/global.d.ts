@@ -5,10 +5,17 @@
 declare global {
   interface Window {
     onto?: {
-      request: (args: { method: string; params?: any[] }) => Promise<any>;
+      request: (args: {
+        method: string;
+        params?: unknown[];
+      }) => Promise<unknown>;
+      isONTO?: boolean;
     };
     ethereum?: {
-      request: (args: { method: string; params?: any[] }) => Promise<any>;
+      request: (args: {
+        method: string;
+        params?: unknown[];
+      }) => Promise<unknown>;
     };
   }
 }

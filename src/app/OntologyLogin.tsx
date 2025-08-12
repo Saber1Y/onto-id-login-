@@ -10,7 +10,7 @@ const OntologyLogin = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [result, setResult] = useState("");
   interface Provider {
-    request: (args: { method: string; params?: any[] }) => Promise<any>;
+    request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
     isONTO?: boolean;
   }
   const [provider, setProvider] = useState<Provider | null>(null);
@@ -65,6 +65,10 @@ const OntologyLogin = () => {
       const accounts = await provider.request({
         method: "eth_requestAccounts",
       });
+      // Type guard for accounts
+      if (!Array.isArray(accounts) || typeof accounts[0] !== "string") {
+        throw new Error("Failed to retrieve wallet address");
+      }
       const account = accounts[0];
       const did = `did:etho:${account.replace("0x", "")}`;
 

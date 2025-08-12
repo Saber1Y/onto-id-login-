@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     challenges[nonce] = { nonce, created };
     // You can add more fields as needed for your flow
     return NextResponse.json({ nonce, created });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 }
