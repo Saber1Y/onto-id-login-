@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { challenges } from "../challengeStore";
+import jwt from "jsonwebtoken";
+
+const JWT_SECRET = process.env.JWT_SECRET || "dev_secret_change_me";
 
 export async function GET() {
   // Generate a unique challenge (nonce)
@@ -21,9 +23,11 @@ export async function POST(req: NextRequest) {
       .toString(36)
       .substring(2, 10)}`;
     const created = new Date().toISOString();
-    challenges[nonce] = { nonce, created };
-    // You can add more fields as needed for your flow
-    return NextResponse.json({ nonce, created });
+    // Sign the challenge as a JWT
+    const challengeJwt = jwt.sign({ nonce, created }, JWT_SECRET, {
+      expiresIn: "5m",
+    });
+    return NextResponse.json({ nonce, created, challengeJwt });
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }

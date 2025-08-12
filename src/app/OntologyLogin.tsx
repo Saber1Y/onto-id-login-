@@ -129,6 +129,7 @@ const OntologyLogin = () => {
           value: signature,
         },
         VPs: [],
+        challengeJwt: challenge.challengeJwt, // include the JWT from backend
       };
 
       const resultResponse = await fetch("/api/submitAuth", {
