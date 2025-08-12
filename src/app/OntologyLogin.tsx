@@ -275,7 +275,7 @@ const OntologyLogin = () => {
             <span className="text-white font-semibold">Ontology Network</span>
           </p>
           <p className="mt-3">Built by Saber</p>
-          <p>
+          <p className="flex justify-center items-center gap-4 mt-4">
             <Link href="https://Github.com/Saber1Y">
               <FaGithub className="ml-2" />
             </Link>
